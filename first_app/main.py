@@ -2,10 +2,12 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
+# Partie 2 : première app
 @app.get("/")
 def hello_fastapi():
     return {"message" : "API FastAPI opérationnelle"}
 
+# Partie 3 : Routage et paramètres
 @app.get("/users")
 def user ():
     u = [
@@ -24,3 +26,11 @@ def user ():
     return u
 
     
+# Partie 4 : Typage et validation automatique
+@app.get("/users/{user_id}")
+def get_user (user_id: int):
+    return {"id" : user_id}
+
+@app.get("/search")
+def search(name:str or None = None):
+    return {"search" : name}

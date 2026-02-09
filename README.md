@@ -21,3 +21,18 @@ J'ai créer un fichier main.py dans lequel, puis j'ai lancer le serveur uvicorn 
 <h2> Partie 3 </h2>
 
 Je crée une nouvelle route users avec une fonction user où je déclare une liste de dictionnaire avec des champs id et login. Ensuite je retourne le dictionnaire qui sera sérialisé en JSON.
+
+<h2> Partie 4 </h2>
+4.2) Validation automatique des paramètres
+
+Cas 1 :  
+Oui la route est executée et elle retourne la valeur mis en paramètre si c'est un entier sinon il y a une erreur.
+
+Cas 2 : 
+La fonction est exécutée mais le paramètre n'est pas retourné car ce n'est pas un entier.
+
+4.3) Typage des Query Parameters
+
+1. Le paramètre n'est pas obligatoire grâce à "(name:str or None = None)".
+2. Toutes les valeurs sont acceptées car elles sont considérées comme des chaînes de caractères.
+
