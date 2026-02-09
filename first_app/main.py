@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from pydantic import BaseModel, Field
 
 app = FastAPI()
 
@@ -22,11 +23,11 @@ def user ():
         {"id" : 9, "login" : "ismael"},
         {"id" : 10, "login" : "julien"},
     ]
-
     return u
 
     
 # Partie 4 : Typage et validation automatique
+
 @app.get("/users/{user_id}")
 def get_user (user_id: int):
     return {"id" : user_id}
@@ -34,3 +35,7 @@ def get_user (user_id: int):
 @app.get("/search")
 def search(name:str or None = None):
     return {"search" : name}
+
+
+
+
