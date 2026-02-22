@@ -1,9 +1,8 @@
-import fastapi, pydantic, json
-from factories.users_factory import users_factory
-from models.user_model import UserModel
+from app.factories.users_factory import users_factory
+from app.core.settings import Settings
 
-chemin_fichier = "data/users.json"
-
+settings = Settings()
+chemin = settings.users_json_path
 u = users_factory()
-a = u.create_users(chemin_fichier)
+a = u.create_users(chemin)
 print(a[1])
