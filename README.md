@@ -36,3 +36,33 @@ La fonction est exécutée mais le paramètre n'est pas retourné car ce n'est p
 1. Le paramètre n'est pas obligatoire grâce à "(name:str or None = None)".
 2. Toutes les valeurs sont acceptées car elles sont considérées comme des chaînes de caractères.
 
+<h2> Partie 5 </h2>
+
+5.1) Exemple de modèle Pydantic
+
+Field sert à configurer un champ d'un model, dans user_model.py j'utilise field pour fixer les limites de l'age (minimum 1 et maximum 120).
+
+1) Le champ id n'est pas présent dans le modèle userCreate car userCreate sert de consommable à l'API c'est-à-dire qu'il valide le format des données entrantes et sortantes.
+
+2)Il doit être attribué par user_model au moment où on insère dans la base de données car c'est cette classe qui a pour but la persistance.
+
+5.2) Création de la factory d'utilisateurs
+
+1) Car on souhaite séparer les responsabilités. L'un va servir de consommable à L'API et l'autre va permettre la persistance.
+2) Car c'est un schéma de données formel, il sert à valider le format des données.
+3) Il est attribé par la bdd lorsqu'on y ajoute un objet.
+4) Tout d'abord l'api ne sera pas documenter correctement, et je ne respecterai pas le principe SOLID.
+
+5) 
+
+5.3) Créer la factory UsersFactory
+
+La méthode create_users a pour rôle de charger et de convertir des données brutes en objets. Elle prend en paramètre le chemin d'un fichier JSON, l'ouvre, et charge son contenu dans un dictionnaire Python. Après s'être assurée que la clé principale "users" est bien présente dans ce dictionnaire, la méthode parcourt la liste des utilisateurs. Chaque entrée est alors transformée en une instance de la classe UserModel, puis ajoutée à une liste qui est finalement retournée par la fonction.
+
+1) Elle ne doit pas importer fastAPI car sa seul responsabilité est de créer des utilisateurs.
+2) Je ne respecterai pas le principe de responsabilité unique et si je souhaite réutiliser la factory dans un autre contexte je serai obliger de lancer un serveur web.
+3) Si je souhaite ajouter les utilisateurs du fichier json directement dans une bdd.
+
+5.5)  Tests unitaires de la factory
+
+1) Le cas où la clé n'est pas dans le fichier, le cas avec la bonne clé et le bon format de données et le cas avec le mauvais format de données.
