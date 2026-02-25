@@ -1,8 +1,13 @@
-from factories.users_factory import users_factory
-from core.settings import Settings
+from fastapi import FastAPI
+from app.api.routers.users_router import router
 
-settings = Settings()
-chemin = settings.users_json_path()
-u = users_factory()
-a = u.create_users(chemin)
-print(a[1])
+def create_app() -> FastAPI:
+    app = FastAPI(
+        title="TP SOCLE FastAPI",
+        description="API de gestion des utilisateurs",
+        version="1"
+    )
+    app.include_router(router)
+    return app
+
+app = create_app()
