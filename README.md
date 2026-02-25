@@ -16,7 +16,7 @@ Elles servent à tout d'abord avoir un environnement virtuel actif avec les dép
 
 <h2> Partie 2 </h2>
 
-J'ai créer un fichier main.py dans lequel, puis j'ai lancer le serveur uvicorn avec "uvicorn main:app". Enfin j'affiche un message à l'url de base (http://127.0.0.1:8000) et je teste la route avec swagger (http://127.0.0.1:8000/docs)
+J'ai créer un fichier main.py dans lequel je retourne un message, puis j'ai lancer le serveur uvicorn avec "uvicorn main:app". Enfin j'affiche un message à l'url de base (http://127.0.0.1:8000) et je teste la route avec swagger (http://127.0.0.1:8000/docs)
 
 <h2> Partie 3 </h2>
 
@@ -66,3 +66,11 @@ La méthode create_users a pour rôle de charger et de convertir des données br
 5.5)  Tests unitaires de la factory
 
 1) Le cas où la clé n'est pas dans le fichier, le cas avec la bonne clé et le bon format de données et le cas avec le mauvais format de données.
+
+<h2>Partie 8</h2>
+
+8.3) création de l'interface du service avec 3 méthodes : list_users() qui retourne une liste de UserModel, get_user_by_id(user_id : int) qui retourne un UserModel ou rien et create_user(payload : UserModelCreate) qui retourne un UserModel.
+
+8.4) Le service implémente l'interface ce qui garantit le respect du contrat des méthodes que l'on a définis.
+Le constructeur du service reçoit une factory et un objet settings en paramètre. Ensuite il charge les données une seule fois au démarrage dans une liste sans avoir directement accès au variables d'environnement. De plus, la méthode list_users retourne une copie de la liste afin de protéger l'intégrité des données du service contre toute modification accidentelle à l'extérieur.
+Enfin, la méthode create_user calcul l'id suivant à l'aide de max() ou l'initialise à 1 si la liste users est vide. Puis transforme le payload UserModelCreate reçu en paramètre en UserModel. J'ai utilisé model_dump() et ** pour fusionner les attributs. J'ajoute ensuite le nouvel objet dans la liste puis je le retourne.
